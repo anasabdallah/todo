@@ -39,7 +39,32 @@ module.exports.addTodo = function(req, res){
                 } else {
                     res.send("db updated!")
                 }
-            })
+            });
+        }
+    });
+}
+
+module.exports.deleteTodo = function(req, res){
+    getData((err, data) => {
+        if(err){
+            console.log(err);
+            res.send(err);
+        } else {
+            var jsonData = JSON.parse(data);
+            for(i in jsonData.todos){
+                if(jsonData.todos[i].title === req.query.todoTitle){
+                    jsonData.todos.splice(i, 1);
+                }
+            }
+            console.log(req.query.todoTitle);
+            writeData(jsonData, (err) =>{
+                if(err){
+                    console.log(err);
+                    res.send(err);
+                } else {
+                    res.send("db updated!");
+                }
+            });
         }
     });
 }

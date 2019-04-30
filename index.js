@@ -14,6 +14,10 @@ app.post('/', (req, res) => {
     worker.addTodo(req, res);
 });
 
+app.delete('/', (req, res) => {
+    worker.deleteTodo(req, res);
+});
+
 app.listen(3000, () => {
     console.log("running on 3000")
 });
